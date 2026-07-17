@@ -35,16 +35,18 @@
   if(window.MutationObserver){
     new MutationObserver(lockViewport).observe(document.head, { childList:true, subtree:false });
   }
+  // Pin container to the full DOCUMENT viewport. documentElement.clientWidth/
+  // Height is the most stable value on iOS standalone cold-start / rotation
+  // (WebKit bug 170595 makes innerHeight/visualViewport stale). Touch stays
+  // correct: canvas fills 100%/100% and Unity reads its rect fresh per event.
+  // NOTE (Niv, 18.7): on itch.io mobile the page runs inside an iframe whose
+  // width itch caps at (screen - safe-area) ~734pt landscape; we CANNOT exceed
+  // the iframe from inside, so any residual grey outer bars are itch's page.
+  var de = document.documentElement;
   function fit(){
     window.scrollTo(0,0);
     var cont = document.querySelector("#unity-container");
-    // Pin container to the full DOCUMENT viewport (documentElement is the most
-    // stable value on iOS standalone/rotation). NOTE: on itch.io mobile our page
-    // runs inside an iframe whose width itch caps at (screen - safe-area) ~734pt
-    // in landscape; we cannot exceed the iframe from inside, so the grey outer
-    // bars are itch's page, not ours. Touch stays correct: canvas fills 100%/100%.
-    var de = document.documentElement;
-    var w = Math.max(de.clientWidth||0, window.innerWidth||0);
+    var w = de.clientWidth  || window.innerWidth;
     var h = de.clientHeight || window.innerHeight;
     if(cont){
       cont.style.position = "fixed";
@@ -55,18 +57,12 @@
     window.dispatchEvent(new Event("resize"));
   }
   fit();
-  // Poll for ~3s after each entry/rotation: iOS standalone settles late and may
-  // never fire a resize; re-apply until geometry stabilises (generic, all devices).
-  function settle(){ var n=0, id=setInterval(function(){ fit(); if(++n>12) clearInterval(id); }, 250); }
-  window.addEventListener("load", settle);
-  window.addEventListener("pageshow", settle);
-  window.addEventListener("focus", fit);
-  document.addEventListener("touchstart", fit, {once:false, passive:true});
+  window.addEventListener("load", fit);
   if(window.visualViewport){
     visualViewport.addEventListener("resize", fit);
     visualViewport.addEventListener("scroll", fit);
   }
-  window.addEventListener("orientationchange", function(){ settle(); });
+  window.addEventListener("orientationchange", function(){ setTimeout(fit, 350); });
 })();
 </script><style id="nahala-touch-style">html,body{touch-action:none;-webkit-user-select:none;user-select:none;overscroll-behavior:none;background:#0d0a06;} #unity-canvas{touch-action:none;background:#0d0a06 !important;} #unity-container{background:#0d0a06 !important;}</style><script>document.addEventListener("gesturestart",function(e){e.preventDefault();},{passive:false});document.addEventListener("dblclick",function(e){e.preventDefault();},{passive:false});</script><style id="nahala-loading-style">
 body { background:#0d0a06 !important; }
@@ -121,16 +117,16 @@ body { background:#0d0a06 !important; }
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/web.loader.js?v=1.2.1";
+      var loaderUrl = buildUrl + "/web.loader.js?v=1.2.3";
       var config = {
         arguments: [],
-        dataUrl: buildUrl + "/web.data.unityweb?v=1.2.1",
-        frameworkUrl: buildUrl + "/web.framework.js.unityweb?v=1.2.1",
-        codeUrl: buildUrl + "/web.wasm.unityweb?v=1.2.1",
+        dataUrl: buildUrl + "/web.data.unityweb?v=1.2.3",
+        frameworkUrl: buildUrl + "/web.framework.js.unityweb?v=1.2.3",
+        codeUrl: buildUrl + "/web.wasm.unityweb?v=1.2.3",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "Apeale Games",
         productName: "The Hidden Treasure of Nahala",
-        productVersion: "1.1.9",
+        productVersion: "1.2.3",
         showBanner: unityShowBanner,
         // errorHandler: function(err, url, line) {
         //    alert("error " + err + " occurred at line " + line);
@@ -168,7 +164,7 @@ body { background:#0d0a06 !important; }
 
         // To lower canvas resolution on mobile devices to gain some
         // performance, uncomment the following line:
-        config.devicePixelRatio = 1; // iOS: dpr=1 makes buffer==CSS so Unity input Y maps 1:1 (touch-offset fix) + lowest memory
+        config.devicePixelRatio = Math.min(window.devicePixelRatio || 1, 2); // iOS memory cap (Niv white-screen fix)
 
 
       } else {
@@ -207,7 +203,7 @@ body { background:#0d0a06 !important; }
 <script>
 (function(){function c(){var o=document.getElementById("rotate-overlay");if(!o)return;o.style.display=(window.innerHeight>window.innerWidth)?"flex":"none";}
 window.addEventListener("resize",c);window.addEventListener("orientationchange",c);document.addEventListener("DOMContentLoaded",c);c();})();
-</script><div id="nahala-version-stamp" style="position:fixed;right:8px;top:6px;z-index:9997;color:#d9a92e;font:600 13px Arial;text-shadow:0 1px 2px #000">v1.2.2</div><div id="nahala-warm" style="position:fixed;left:0;right:0;bottom:0;height:4px;background:#2a1f10;z-index:9998;display:none"><div id="nahala-warm-fill" style="height:100%;width:0%;background:#d9a92e"></div></div>
+</script><div id="nahala-version-stamp" style="position:fixed;right:8px;top:6px;z-index:9997;color:#d9a92e;font:600 13px Arial;text-shadow:0 1px 2px #000">v1.2.3</div><div id="nahala-warm" style="position:fixed;left:0;right:0;bottom:0;height:4px;background:#2a1f10;z-index:9998;display:none"><div id="nahala-warm-fill" style="height:100%;width:0%;background:#d9a92e"></div></div>
 <script id="nahala-warmup">
 (function(){
   var files=["StreamingAssets/aa/WebGL/menu_assets_all_9b873e8216d171e0dc8256ef00769d5e.bundle","StreamingAssets/aa/WebGL/miniriddles_assets_all_05569f2ef8cd383f40ab5f4468bbd23a.bundle","StreamingAssets/aa/WebGL/room-bathroom_assets_all_a01ff38184c4f816971d4319c1400e7b.bundle","StreamingAssets/aa/WebGL/room-children-room_assets_all_39eb3ea65f5f8e00c672eff2ba9e6f77.bundle","StreamingAssets/aa/WebGL/room-entrance_assets_all_43f56a89d127ac4b7a693f31a16ee8f2.bundle","StreamingAssets/aa/WebGL/room-garden-1_assets_all_2cac6cf02eee6608a6a6a6ac81440613.bundle","StreamingAssets/aa/WebGL/room-garden-2_assets_all_c0f9f027a285210a584922236e70d74b.bundle","StreamingAssets/aa/WebGL/room-garden-3_assets_all_3c3236c4ce4f1e9138e2321a4e80398a.bundle","StreamingAssets/aa/WebGL/room-hallway_assets_all_3b43c5906f134c99641b492a5e7e9faa.bundle","StreamingAssets/aa/WebGL/room-kitchen_assets_all_763fd6536c0f4c98e6a9bbdba2e30a6c.bundle","StreamingAssets/aa/WebGL/room-living-room_assets_all_ed1ea6cd9e9cfe84fd385c32da843a39.bundle","StreamingAssets/aa/WebGL/room-pantry_assets_all_24d17f8c9c49fef71ac44deeaa21fee5.bundle","StreamingAssets/aa/WebGL/room-parents-room_assets_all_e1f102c6dd10e6ebd3da5ac0e883d5bc.bundle","StreamingAssets/aa/WebGL/room-work-room_assets_all_34ca36bd125809a5e6ed6952f8b81189.bundle"];
@@ -220,7 +216,5 @@ window.addEventListener("resize",c);window.addEventListener("orientationchange",
   }
   window.addEventListener('load', function(){ setTimeout(function(){ bar.style.display='block'; next(); }, 2500); });
 })();
-</script>
-
-</body>
+</script></body>
 </html>
