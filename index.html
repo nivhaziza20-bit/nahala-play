@@ -181,12 +181,12 @@ body { background:#0d0a06 !important; }
         createUnityInstance(canvas, config, (progress) => {
           document.querySelector("#unity-progress-bar-full").style.width = 100 * progress + "%";
               }).then((unityInstance) => {
-                document.querySelector("#unity-loading-bar").style.display = "none";
+                try{sessionStorage.removeItem("nahReload");}catch(e){} document.querySelector("#unity-loading-bar").style.display = "none";
                 document.querySelector("#unity-fullscreen-button").onclick = () => {
                   unityInstance.SetFullscreen(1);
                 };
 
-              }).catch((message) => {
+              }).catch((message) => { try { if(!sessionStorage.getItem("nahReload")){ sessionStorage.setItem("nahReload","1"); location.reload(); return; } } catch(e){}
                 alert(message);
               });
             };
