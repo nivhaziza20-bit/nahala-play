@@ -117,16 +117,16 @@ body { background:#0d0a06 !important; }
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/web.loader.js?v=1.2.8";
+      var loaderUrl = buildUrl + "/web.loader.js?v=1.3.0";
       var config = {
         arguments: [],
-        dataUrl: buildUrl + "/web.data.unityweb?v=1.2.8",
-        frameworkUrl: buildUrl + "/web.framework.js.unityweb?v=1.2.8",
-        codeUrl: buildUrl + "/web.wasm.unityweb?v=1.2.8",
+        dataUrl: buildUrl + "/web.data.unityweb?v=1.3.0",
+        frameworkUrl: buildUrl + "/web.framework.js.unityweb?v=1.3.0",
+        codeUrl: buildUrl + "/web.wasm.unityweb?v=1.3.0",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "Apeale Games",
         productName: "The Hidden Treasure of Nahala",
-        productVersion: "1.2.7",
+        productVersion: "1.3.0",
         showBanner: unityShowBanner,
         errorHandler: function(err, url, line) { if ((""+err).indexOf("Script error") !== -1 && !url) return true; return false; },
         // errorHandler_orig: function(err, url, line) {
@@ -204,10 +204,10 @@ body { background:#0d0a06 !important; }
 <script>
 (function(){function c(){var o=document.getElementById("rotate-overlay");if(!o)return;o.style.display=(window.innerHeight>window.innerWidth)?"flex":"none";}
 window.addEventListener("resize",c);window.addEventListener("orientationchange",c);document.addEventListener("DOMContentLoaded",c);c();})();
-</script><div id="nahala-version-stamp" style="position:fixed;right:8px;top:6px;z-index:9997;color:#d9a92e;font:600 13px Arial;text-shadow:0 1px 2px #000">v1.2.8</div><div id="nahala-warm" style="position:fixed;left:0;right:0;bottom:0;height:4px;background:#2a1f10;z-index:9998;display:none"><div id="nahala-warm-fill" style="height:100%;width:0%;background:#d9a92e"></div></div>
+</script><div id="nahala-version-stamp" style="position:fixed;right:8px;top:6px;z-index:9997;color:#d9a92e;font:600 13px Arial;text-shadow:0 1px 2px #000">v1.3.0</div><div id="nahala-warm" style="position:fixed;left:0;right:0;bottom:0;height:4px;background:#2a1f10;z-index:9998;display:none"><div id="nahala-warm-fill" style="height:100%;width:0%;background:#d9a92e"></div></div>
 <script id="nahala-warmup">
 (function(){
-  var files=["StreamingAssets/aa/WebGL/menu_assets_all_9b873e8216d171e0dc8256ef00769d5e.bundle","StreamingAssets/aa/WebGL/miniriddles_assets_all_05569f2ef8cd383f40ab5f4468bbd23a.bundle","StreamingAssets/aa/WebGL/room-bathroom_assets_all_a01ff38184c4f816971d4319c1400e7b.bundle","StreamingAssets/aa/WebGL/room-children-room_assets_all_39eb3ea65f5f8e00c672eff2ba9e6f77.bundle","StreamingAssets/aa/WebGL/room-entrance_assets_all_43f56a89d127ac4b7a693f31a16ee8f2.bundle","StreamingAssets/aa/WebGL/room-garden-1_assets_all_2cac6cf02eee6608a6a6a6ac81440613.bundle","StreamingAssets/aa/WebGL/room-garden-2_assets_all_c0f9f027a285210a584922236e70d74b.bundle","StreamingAssets/aa/WebGL/room-garden-3_assets_all_3c3236c4ce4f1e9138e2321a4e80398a.bundle","StreamingAssets/aa/WebGL/room-hallway_assets_all_3b43c5906f134c99641b492a5e7e9faa.bundle","StreamingAssets/aa/WebGL/room-kitchen_assets_all_763fd6536c0f4c98e6a9bbdba2e30a6c.bundle","StreamingAssets/aa/WebGL/room-living-room_assets_all_ed1ea6cd9e9cfe84fd385c32da843a39.bundle","StreamingAssets/aa/WebGL/room-pantry_assets_all_24d17f8c9c49fef71ac44deeaa21fee5.bundle","StreamingAssets/aa/WebGL/room-parents-room_assets_all_e1f102c6dd10e6ebd3da5ac0e883d5bc.bundle","StreamingAssets/aa/WebGL/room-work-room_assets_all_34ca36bd125809a5e6ed6952f8b81189.bundle"];
+  var files=["StreamingAssets/aa/WebGL/menu_assets_all_b460d2922c2a1b65da2c78f2ce0d068f.bundle","StreamingAssets/aa/WebGL/miniriddles_assets_all_05569f2ef8cd383f40ab5f4468bbd23a.bundle","StreamingAssets/aa/WebGL/room-bathroom_assets_all_ab08432d384e8cd0fabdfc949d39c920.bundle","StreamingAssets/aa/WebGL/room-children-room_assets_all_14cef5c8711525e3d00f1b70fcf2b809.bundle","StreamingAssets/aa/WebGL/room-entrance_assets_all_3fdb95d011c46843cb183f61e1aef7ad.bundle","StreamingAssets/aa/WebGL/room-garden-1_assets_all_590be7d813418493ef1877aaef97773b.bundle","StreamingAssets/aa/WebGL/room-garden-2_assets_all_869c8a559c4e1b0450941ef4870f7115.bundle","StreamingAssets/aa/WebGL/room-garden-3_assets_all_c17b2f62b35806ac18654192f1833ce8.bundle","StreamingAssets/aa/WebGL/room-hallway_assets_all_2fc86341efe5155b5d9fa873a2b2954a.bundle","StreamingAssets/aa/WebGL/room-kitchen_assets_all_b38f7fb443004fce4f53b9ff75e2c2b5.bundle","StreamingAssets/aa/WebGL/room-living-room_assets_all_d26d51ba76f9ba50102ee334a6e04130.bundle","StreamingAssets/aa/WebGL/room-pantry_assets_all_7c3fdc2840d1c41e4454022af24b9be1.bundle","StreamingAssets/aa/WebGL/room-parents-room_assets_all_a3667027530a33e01708ca0852a89224.bundle","StreamingAssets/aa/WebGL/room-work-room_assets_all_1d498b3bd7950eeee0a35b04191ee3f7.bundle"];
   var done=0, bar=document.getElementById('nahala-warm'), fill=document.getElementById('nahala-warm-fill');
   function next(){
     if(done>=files.length){ bar.style.display='none'; return; }
