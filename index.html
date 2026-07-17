@@ -97,7 +97,7 @@ body { background:#0d0a06 !important; }
       // Modify or remove this function to customize the visually presented
       // way that non-critical warnings and error messages are presented to the
       // user.
-      function unityShowBanner(msg, type) {
+      function unityShowBanner(msg, type) { if (msg && (""+msg).indexOf("Script error") !== -1) return; 
         var warningBanner = document.querySelector("#unity-warning");
         function updateBannerVisibility() {
           warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
@@ -117,16 +117,16 @@ body { background:#0d0a06 !important; }
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/web.loader.js?v=1.2.6";
+      var loaderUrl = buildUrl + "/web.loader.js?v=1.2.7";
       var config = {
         arguments: [],
-        dataUrl: buildUrl + "/web.data.unityweb?v=1.2.6",
-        frameworkUrl: buildUrl + "/web.framework.js.unityweb?v=1.2.6",
-        codeUrl: buildUrl + "/web.wasm.unityweb?v=1.2.6",
+        dataUrl: buildUrl + "/web.data.unityweb?v=1.2.7",
+        frameworkUrl: buildUrl + "/web.framework.js.unityweb?v=1.2.7",
+        codeUrl: buildUrl + "/web.wasm.unityweb?v=1.2.7",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "Apeale Games",
         productName: "The Hidden Treasure of Nahala",
-        productVersion: "1.2.6",
+        productVersion: "1.2.7",
         showBanner: unityShowBanner,
         // errorHandler: function(err, url, line) {
         //    alert("error " + err + " occurred at line " + line);
@@ -203,7 +203,7 @@ body { background:#0d0a06 !important; }
 <script>
 (function(){function c(){var o=document.getElementById("rotate-overlay");if(!o)return;o.style.display=(window.innerHeight>window.innerWidth)?"flex":"none";}
 window.addEventListener("resize",c);window.addEventListener("orientationchange",c);document.addEventListener("DOMContentLoaded",c);c();})();
-</script><div id="nahala-version-stamp" style="position:fixed;right:8px;top:6px;z-index:9997;color:#d9a92e;font:600 13px Arial;text-shadow:0 1px 2px #000">v1.2.6</div><div id="nahala-warm" style="position:fixed;left:0;right:0;bottom:0;height:4px;background:#2a1f10;z-index:9998;display:none"><div id="nahala-warm-fill" style="height:100%;width:0%;background:#d9a92e"></div></div>
+</script><div id="nahala-version-stamp" style="position:fixed;right:8px;top:6px;z-index:9997;color:#d9a92e;font:600 13px Arial;text-shadow:0 1px 2px #000">v1.2.7</div><div id="nahala-warm" style="position:fixed;left:0;right:0;bottom:0;height:4px;background:#2a1f10;z-index:9998;display:none"><div id="nahala-warm-fill" style="height:100%;width:0%;background:#d9a92e"></div></div>
 <script id="nahala-warmup">
 (function(){
   var files=["StreamingAssets/aa/WebGL/menu_assets_all_9b873e8216d171e0dc8256ef00769d5e.bundle","StreamingAssets/aa/WebGL/miniriddles_assets_all_05569f2ef8cd383f40ab5f4468bbd23a.bundle","StreamingAssets/aa/WebGL/room-bathroom_assets_all_a01ff38184c4f816971d4319c1400e7b.bundle","StreamingAssets/aa/WebGL/room-children-room_assets_all_39eb3ea65f5f8e00c672eff2ba9e6f77.bundle","StreamingAssets/aa/WebGL/room-entrance_assets_all_43f56a89d127ac4b7a693f31a16ee8f2.bundle","StreamingAssets/aa/WebGL/room-garden-1_assets_all_2cac6cf02eee6608a6a6a6ac81440613.bundle","StreamingAssets/aa/WebGL/room-garden-2_assets_all_c0f9f027a285210a584922236e70d74b.bundle","StreamingAssets/aa/WebGL/room-garden-3_assets_all_3c3236c4ce4f1e9138e2321a4e80398a.bundle","StreamingAssets/aa/WebGL/room-hallway_assets_all_3b43c5906f134c99641b492a5e7e9faa.bundle","StreamingAssets/aa/WebGL/room-kitchen_assets_all_763fd6536c0f4c98e6a9bbdba2e30a6c.bundle","StreamingAssets/aa/WebGL/room-living-room_assets_all_ed1ea6cd9e9cfe84fd385c32da843a39.bundle","StreamingAssets/aa/WebGL/room-pantry_assets_all_24d17f8c9c49fef71ac44deeaa21fee5.bundle","StreamingAssets/aa/WebGL/room-parents-room_assets_all_e1f102c6dd10e6ebd3da5ac0e883d5bc.bundle","StreamingAssets/aa/WebGL/room-work-room_assets_all_34ca36bd125809a5e6ed6952f8b81189.bundle"];
